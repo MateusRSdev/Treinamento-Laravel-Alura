@@ -6,21 +6,26 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller{
     
-    public function show()
+    public function index(Request $request)
     {
+
+        // return $request->url();
+
+        // return redirect("https://google.com");
         
-        $listaDeSeries = [
+        $series = [
             "filhos da anarquia",
             "the walking dead",
-            "the witcher"
+            "the witcher",
+            
         ];
         
-        $html = "<ul>";
-        foreach($listaDeSeries as $serie){
-            $html .= "<li>".$serie."</li>";
-        }
-        $html .= "</ul>";
+        // $html = "<ul>";
+        // foreach($listaDeSeries as $serie){
+        //     $html .= "<li>".$serie."</li>";
+        // }
+        // $html .= "</ul>";
         
-        echo $html;
+        return view("listar-series",compact("series"));
     }
 }
