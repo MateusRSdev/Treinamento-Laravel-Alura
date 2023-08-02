@@ -26,6 +26,7 @@ class SeriesController extends Controller{
         // }
         // $html .= "</ul>";
         
-        return view("listar-series",compact("series"));
+        // return view("listar-series",compact("series"));
+        return view("series.index")->with("series",$series);
     }
 }
