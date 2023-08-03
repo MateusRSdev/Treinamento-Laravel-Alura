@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Serie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,12 +15,8 @@ class SeriesController extends Controller{
 
         // return redirect("https://google.com");
         
-        $series = [
-            "filhos da anarquia",
-            "the walking dead",
-            "the witcher) = >",
-            
-        ];
+        $series = Serie::query()->orderBy("nome")->get();
+        // dd($series);
         
         // $html = "<ul>";
         // foreach($listaDeSeries as $serie){
@@ -39,11 +36,12 @@ class SeriesController extends Controller{
         
         $nomeSerie = $request->input("nome");
 
-        if(DB::insert("INSERT INTO series (nome) VALUES (?)")){
-            return "OK";
-        }else{
-            return "DEU RUIM";
-        }
+        $serie = new Serie;
+        $serie->nome = $nomeSerie;
+        $serie->save();
 
+        // if(DB::insert("INSERT INTO series (nome) VALUES (?)" ,[$nomeSerie])){
+            return redirect("/series");
+      
     }
 }
