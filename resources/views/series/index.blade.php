@@ -1,19 +1,13 @@
 
 <x-layout title="series">
-    <a href="series/new">Criar</a>
-    <ul>
+    <a href="series/new" class="btn btn-dark mb-3">Criar</a>
+    <ul class="list-group">
     @foreach($series as $serie)
-    <li>{{ $serie }}</li>
+    <li class="list-group-item">{{ $serie }}</li>
     @endforeach
 </ul>
     
-    @{{ nome }}
 
-    <script>
-
-        const series = {{ Js::from($series) }}
-
-    </script>
 
 </x-layout>
     
