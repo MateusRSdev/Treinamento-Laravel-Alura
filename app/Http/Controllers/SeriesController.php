@@ -41,4 +41,11 @@ class SeriesController extends Controller{
             return redirect()->route("series.index");
       
     }
+
+    public function destroy(Request $request){
+        // dd($request->id);
+        Serie::destroy($request->series);
+        $request->session()->put("mensagem.sucesso","Serie removida com sucesso");
+        return to_route("series.index");
+    }
 }
