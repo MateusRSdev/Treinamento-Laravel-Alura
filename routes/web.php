@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeriesController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +15,8 @@ use App\Http\Controllers\SeriesController;
 */
 
 Route::get('/', function () {
-    return redirect("/series");
+    return redirect('/series');
 });
 
-
-Route::resource("/series",SeriesController::class)->only([
-    "index",
-    "create", 
-    "store",
-    "destroy"
-]);
-
-
-// Route::controller(SeriesController::class)->group(function () {
-    
-//     Route::get("/series" , "index");
-//     Route::get("/series/create" , "create")->name("series.create");
-//     Route::post("/series/salvar" , "store");
-    
-// });
+Route::resource('/series', SeriesController::class)
+    ->except(['show']);
