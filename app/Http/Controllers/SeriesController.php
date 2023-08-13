@@ -30,34 +30,31 @@ class SeriesController extends Controller
     {
 
         try {
-
             $serie = DB::transaction(function () use ($request, &$serie) {
+            $serie = Serie::create($request->all());
+            $seasons = [];
 
+            for ($i = 1; $i <= $request->seasonsQtd; $i++) {
+                $seasons[] = [
+                    "series_id" => $serie->id,
+                    "number" => $i
+                ];
 
-                $serie = Serie::create($request->all());
-                $seasons = [];
+            }
+            Season::insert($seasons);
 
-                for ($i = 1; $i <= $request->seasonsQtd; $i++) {
-                    $seasons[] = [
-                        "series_id" => $serie->id,
-                        "number" => $i
+            $episodes = [];
+            foreach ($serie->seasons as $season) {
+                for ($j = 1; $j <= $request->episodesPerSeason; $j++) {
+                    $episodes[] = [
+                        "season_id" => $season->id,
+                        "number" => $j
                     ];
-
                 }
-                Season::insert($seasons);
+            }
+            Episode::insert($episodes);
 
-                $episodes = [];
-                foreach ($serie->seasons as $season) {
-                    for ($j = 1; $j <= $request->episodesPerSeason; $j++) {
-                        $episodes[] = [
-                            "season_id" => $season->id,
-                            "number" => $j
-                        ];
-                    }
-                }
-                Episode::insert($episodes);
-
-                return $serie;
+            return $serie;
 
             }, 5);
 
