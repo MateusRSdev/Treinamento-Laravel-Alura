@@ -10,8 +10,16 @@
 </head>
 <body>
 <div class="container">
+    
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a href="{{route("series.index")}}" class="navbar-brand">Series</a>
+            
+            <a class="navbar-brand" href="{{route("logout")}}">Sair</a>
+            
+        </div>
+    </nav>
     <h1>{{ $title }}</h1>
-
     
     @isset($mensagemSucesso)
     <div class="alert alert-success">

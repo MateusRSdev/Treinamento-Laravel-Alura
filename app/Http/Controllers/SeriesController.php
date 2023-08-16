@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Series;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Repositories\SeriesRepository;
 use App\Http\Requests\SeriesFormRequest;
 use App\Repositories\EloquentSeriesRepository;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
@@ -17,6 +19,10 @@ class SeriesController extends Controller
     } 
     public function index(Request $request)
     {
+        if(!Auth::check()){
+            throw new AuthorizationException();
+            
+        };
         $series = Series::with(["seasons"])->get();
         $mensagemSucesso = session('mensagem.sucesso');
 
