@@ -1,4 +1,4 @@
-<x-layout title="Login" >
+<x-layout title="Login" :login="true">
     <form action="" method="post" class="mt-2">
         @csrf
         <div class="form-group">

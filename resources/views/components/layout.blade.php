@@ -14,8 +14,18 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a href="{{route("series.index")}}" class="navbar-brand">Series</a>
-            
+            {{-- executa somente se tiver um usuario logado!!!!!!!!!!! --}}
+            @auth
             <a class="navbar-brand" href="{{route("logout")}}">Sair</a>
+            @endauth
+            
+            @if (!isset($login))
+            {{-- executa quando nao tem um usuario logado --}}
+                @guest
+                <a class="navbar-brand" href="{{route("login")}}">Entrar</a>
+                @endguest
+                
+            @endif
             
         </div>
     </nav>

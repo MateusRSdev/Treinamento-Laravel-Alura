@@ -22,6 +22,7 @@ class UsersController extends Controller
 
         Auth::login($user);
 
+
         return to_route("series.index");
     }
 }
