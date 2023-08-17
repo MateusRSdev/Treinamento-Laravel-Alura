@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UsersController
 {
     public function create()
     {
-        return view("login.create");
+        return view('users.create');
     }
 
-    public function store(Request $request){
-        $data = $request->except(["token"]);
-        $data["password"] = Hash::make($data["password"]);
-        
-        $user = User::create($data);
+    public function store(Request $request)
+    {
+        $data = $request->except(['_token']);
+        $data['password'] = Hash::make($data['password']);
 
+        $user = User::create($data);
         Auth::login($user);
 
-
-        return to_route("series.index");
+        return to_route('series.index');
     }
 }
