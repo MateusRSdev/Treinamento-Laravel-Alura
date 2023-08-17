@@ -15,13 +15,14 @@ class EloquentSeriesRepository implements SeriesRepository
         return DB::transaction(function () use ($request) {
             $serie = Series::create($request->all());
             $seasons = [];
-            for ($i = 1; $i <= $request->seasonsQty; $i++) {
+            for ($i = 1; $i <= $request->seasonsQtd; $i++) {
                 $seasons[] = [
                     'series_id' => $serie->id,
                     'number' => $i,
                 ];
             }
             Season::insert($seasons);
+            // dd($seasons);
 
             $episodes = [];
             foreach ($serie->seasons as $season) {
@@ -33,6 +34,7 @@ class EloquentSeriesRepository implements SeriesRepository
                 }
             }
             Episode::insert($episodes);
+            // dd($episodes);
 
             return $serie;
         });
