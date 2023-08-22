@@ -35,24 +35,15 @@ class SeriesController extends Controller
     {
         // dd(User::all());
         $serie = $this->repository->add($request);
-        
-       
-        $userList = User::all();
-        foreach ($userList as $index => $user) {
-            $email = new SeriesCreated(
-                $serie->nome,
-                $serie->id,
-                $request->seasonsQtd,
-                $request->episodesPerSeason,
-    
-            );
+            \App\Events\SeriesCreated::dispatch(
+            $serie->nome,
+            $serie->id,
+            $request->seasonsQtd,
+            $request->episodesPerSeason,
+        );
+        // $seriesCreatedEvent->dispatch()
+    //    \App\Events\SeriesCreated::dispatch();
 
-            $now = now()->addSeconds($index*4);
-            Mail::to($user)->later($now, $email);
-            // Mail::to($user)->queue($email);
-            // sleep(2);
-            
-        }
         
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
