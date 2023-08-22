@@ -1,5 +1,5 @@
 <x-layout title="Nova Série">
-    <form action="{{ route('series.store') }}" method="post">
+    <form action="{{ route('series.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="row mb-3">
@@ -14,12 +14,12 @@
             </div>
 
             <div class="col-2">
-                <label for="seasonsQty" class="form-label">Nº Temporadas:</label>
+                <label for="seasonsQtd" class="form-label">Nº Temporadas:</label>
                 <input type="text"
-                       id="seasonsQty"
-                       name="seasonsQty"
+                       id="seasonsQtd"
+                       name="seasonsQtd"
                        class="form-control"
-                       value="{{ old('seasonsQty') }}">
+                       value="{{ old('seasonsQtd') }}">
             </div>
 
             <div class="col-2">
@@ -29,6 +29,12 @@
                        name="episodesPerSeason"
                        class="form-control"
                        value="{{ old('episodesPerSeason') }}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="cover" class="form-label">Capa</label>
+                <input type="file" id="cover" name="cover" class="form-control" accept="image/jpeg image/gif image/png">
             </div>
         </div>
 
