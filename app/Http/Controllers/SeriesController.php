@@ -38,7 +38,7 @@ class SeriesController extends Controller
         //  dd($coverPath);
         $request->coverPath = $coverPath;
         $serie = $this->repository->add($request);
-            \App\Events\SeriesCreated::dispatch(
+        \App\Events\SeriesCreated::dispatch(
             $serie->nome, 
             $serie->id,
             $request->seasonsQtd,
