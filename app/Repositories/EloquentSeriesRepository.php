@@ -12,8 +12,9 @@ class EloquentSeriesRepository implements SeriesRepository
 {
     public function add(SeriesFormRequest $request): Series
     {   
+   
         return DB::transaction(function () use ($request) {
-            // dd($request->coverPath);
+         
             $serie = Series::create([
                 "nome"=>$request->nome,
                 "cover"=>$request->coverPath,
@@ -26,7 +27,6 @@ class EloquentSeriesRepository implements SeriesRepository
                 ];
             }
             Season::insert($seasons);
-            // dd($seasons);
 
             $episodes = [];
             foreach ($serie->seasons as $season) {

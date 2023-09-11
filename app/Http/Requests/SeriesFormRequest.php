@@ -25,7 +25,9 @@ class SeriesFormRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'min:2'],
-            "capa"=>["image","mimes:gif,jpeg,png"]
+            "capa"=>["image","mimes:gif,jpeg,png"],
+            // "seasonsQtd"=>["numeric"],
+            // "episodesPerSeason"=>["numeric"]
         ];
     }
 }
