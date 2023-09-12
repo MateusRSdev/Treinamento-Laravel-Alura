@@ -23,8 +23,11 @@ class SeriesController
     }
 
     public function show(int $seriesId){
-        $series = Series::whereId($seriesId)->with("seasons.episodes")->first();
-        return $series;
+        $seriesModel = Series::with("seasons.episodes")->find($seriesId);
+        if($seriesModel === null){
+            return response()->json(["message"=>"Serie não encontrada"],404);
+        }
+        return $seriesModel;
     }
     public function update(Series $series, SeriesFormRequest $request){
         $series->fill($request->all());
